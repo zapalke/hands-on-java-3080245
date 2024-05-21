@@ -6,8 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.security.auth.login.AccountExpiredException;
-
 public class DataSource {
 
   public static Connection connect() {
