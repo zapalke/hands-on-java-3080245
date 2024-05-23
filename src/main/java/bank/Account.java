@@ -1,5 +1,7 @@
 package bank;
 
+import javax.xml.crypto.Data;
+
 import bank.exceptions.AmountException;
 
 public class Account {
@@ -40,14 +42,23 @@ public class Account {
   public void deposit(double amount) throws AmountException {
     if (amount < 1) {
       throw new AmountException("The minimum deposit is 1.00");
-    } else{
+    } else {
       double newBalance = balance + amount;
       setBalance(newBalance);
+      DataSource.updateAccountBalance(id, newBalance);
     }
   }
 
-  public void withdraw(double amount) {
-
+  public void withdraw(double amount) throws AmountException {
+    if (amount < 0) {
+      throw new AmountException(("the withdraw must be grater than 0."));
+    } else if (amount > getBalance()) {
+      throw new AmountException(("Withdraw amount is greater than ammount on account"));
+    } else {
+      double newBalance = balance - amount;
+      setBalance(newBalance);
+      DataSource.updateAccountBalance(id, newBalance);
+    }
   }
 
 }
